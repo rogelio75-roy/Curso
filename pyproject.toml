@@ -7,6 +7,9 @@ requires-python = ">=3.12,<3.13"
 dependencies = [
     "fastapi>=0.115",
     "uvicorn[standard]>=0.30",
+    "sqlalchemy>=2.0",
+    "alembic>=1.13",
+    "psycopg[binary]>=3.1",
 ]
 
 [dependency-groups]
@@ -25,6 +28,11 @@ line-length = 88
 
 [tool.ruff.lint]
 select = ["E", "F", "I", "UP", "B"]
+
+[tool.ruff.lint.isort]
+# El directorio local `alembic/` hace que isort clasifique el paquete `alembic`
+# como first-party; es una dependencia de terceros.
+known-third-party = ["alembic"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
